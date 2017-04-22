@@ -3,7 +3,7 @@ local map = require "map1"
 
 function level1:init()
 	--background music
-	level1.bgm = love.audio.newSource("music/power.wav", "static")
+	level1.bgm = love.audio.newSource("music/tense.wav", "static")
 	level1.bgm:setLooping(true)
 	level1.bgm:play()
 

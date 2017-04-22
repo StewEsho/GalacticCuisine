@@ -1,6 +1,7 @@
 local player = {}
 local plate = require "plate"
 local earth = require "earth"
+require("AnAL")
 
 function player:init(x, y)
 	player.x = x
@@ -11,6 +12,9 @@ function player:init(x, y)
 	player.jumpCooldown = 5
 	player.currentJumpCooldown = player.jumpCooldown
 	player.isGrounded = false
+
+	player.spritesheet = love.graphics.newImage("art/player.png")
+	player.animation = newAnimation(player.spritesheet, 128, 300, 0.2, 0)
 
 	player.body = love.physics.newBody(world, player.x, player.y, "dynamic")
 	player.body:setFixedRotation(true)
@@ -51,11 +55,15 @@ function player:run(dt)
 	--store position
 	player.x = player.body:getX()
 	player.y = player.body:getY()
+
+	player.animation:update(dt)
 end
 
 function player:draw()
 	love.graphics.setColor(255, 255, 255)
-	love.graphics.polygon("fill", player.body:getWorldPoints(player.shape:getPoints()))
+
+	love.graphics.draw(love.graphics.newImage("art/playerhand.png"), player.x - 15, player.y - 80)
+	player.animation:draw(player.x-64, player.y-150)
 end
 
 --------------------------------------------------------------------------------
