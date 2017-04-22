@@ -12,12 +12,12 @@ function plate:init(x, y)
 	plate.rEdge = {}
 	plate.rEdge.body = love.physics.newBody(world, x+95, y-40, "dynamic")
 	plate.rEdge.shape = love.physics.newRectangleShape(10, 80)
-	plate.rEdge.fixture = love.physics.newFixture(plate.rEdge.body, plate.rEdge.shape, 0.5)
+	plate.rEdge.fixture = love.physics.newFixture(plate.rEdge.body, plate.rEdge.shape, 0.1)
 
 	plate.lEdge = {}
 	plate.lEdge.body = love.physics.newBody(world, x-95, y-40, "dynamic")
 	plate.lEdge.shape = love.physics.newRectangleShape(10, 80)
-	plate.lEdge.fixture = love.physics.newFixture(plate.lEdge.body, plate.lEdge.shape, 0.5)
+	plate.lEdge.fixture = love.physics.newFixture(plate.lEdge.body, plate.lEdge.shape, 0.1)
 
 	love.physics.newWeldJoint(plate.body, plate.rEdge.body, plate.rEdge.body:getX(), plate.rEdge.body:getY(), true)
 	love.physics.newWeldJoint(plate.body, plate.lEdge.body, plate.lEdge.body:getX(), plate.lEdge.body:getY(), true)
@@ -28,14 +28,14 @@ function plate:init(x, y)
 	plate.body:setGravityScale(2)
 
 	--speed variables
-	plate.forceSpeed = 500
+	plate.forceSpeed = 10000
 end
 
 function plate:run()
 	if(love.keyboard.isDown("q")) then
-		plate.body:applyAngularImpulse(-plate.forceSpeed)
+		plate.body:applyTorque(-plate.forceSpeed)
 	elseif (love.keyboard.isDown("e")) then
-		plate.body:applyAngularImpulse(plate.forceSpeed)
+		plate.body:applyTorque(plate.forceSpeed)
 	end
 end
 

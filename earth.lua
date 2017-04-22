@@ -7,9 +7,9 @@ function earth:init(x, y)
 
 	earth.body = love.physics.newBody(world, x, y, "dynamic")
 	earth.shape = love.physics.newCircleShape(16)
-	earth.fixture = love.physics.newFixture(earth.body, earth.shape, 2)
+	earth.fixture = love.physics.newFixture(earth.body, earth.shape, 1)
 	earth.fixture:setFriction(1)
-	-- earth.fixture:setCategory(2)
+	earth.fixture:setCategory(2)
 end
 
 function earth:run()

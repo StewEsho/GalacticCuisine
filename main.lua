@@ -27,7 +27,7 @@ function love.load()
 
 	--initialize player and earth
 	player:init(300, 200)
-	earth:init(plate.x, plate.y - 200)
+	earth:init(plate.x-.1, plate.y - 200)
 end
 
 function love.update(dt)
