@@ -8,6 +8,7 @@ function love.load(zz)
 	--enable physics
 	love.physics.setMeter(128)
 	world = love.physics.newWorld(0, 9.81*128, true)
+	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 	love.graphics.setDefaultFilter('nearest', 'nearest')
 
 	--set resolution etc.
@@ -17,10 +18,12 @@ function love.load(zz)
 	-- love.window.setFullscreen(true)
 
 	--initialize player and earth
-	player:init(300, 200)
+	player:init(300, 0)
 	earth:init(plate.x-.1, plate.y - 50)
 
 	l1:init()
+
+	debugText = "DEBUG"
 end
 
 function love.update(dt)
@@ -29,6 +32,8 @@ function love.update(dt)
 	player:run(dt)
 	plate:run()
 	earth:run()
+
+	debugText = "JUMP COOLDOWN: " .. player.currentJumpCooldown
 end
 
 function love.draw()
@@ -43,5 +48,31 @@ function love.draw()
 	l1:draw()
 
 	love.graphics.pop()
+
+	love.graphics.print(debugText, 10, 10)
+
+end
+
+--------------------------------------------------------------------------------
+-- Physics Callbacks
+--------------------------------------------------------------------------------
+
+function beginContact(f1, f2, col)
+	if(f1:getUserData() == "player" and f2:getUserData() == "ground") then
+		player.isGrounded = true
+	end
+end
+
+function endContact(f1, f2, col)
+	if(f1:getUserData() == "player" and f2:getUserData() == "ground") then
+		player.isGrounded = false
+	end
+end
+
+function preSolve(f1, f2, col)
+
+end
+
+function postSolve(f1, f2, col, normalImp, tangentImp)
 
 end

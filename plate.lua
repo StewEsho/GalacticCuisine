@@ -25,7 +25,10 @@ function plate:init(x, y)
 	plate.fixture:setCategory(2)
 	plate.rEdge.fixture:setCategory(2)
 	plate.lEdge.fixture:setCategory(2)
-	plate.body:setGravityScale(2)
+	plate.fixture:setUserData("plate")
+	plate.rEdge.fixture:setUserData("plate")
+	plate.lEdge.fixture:setUserData("plate")
+	plate.body:setGravityScale(1)
 
 	--speed variables
 	plate.forceSpeed = 10000

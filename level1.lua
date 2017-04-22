@@ -8,9 +8,10 @@ function level1:init()
 
 	--ground
 	level1.ground = {}
-	level1.ground.body = love.physics.newBody(world, love.graphics.getWidth()/2, love.graphics.getHeight(), "static")
-	level1.ground.shape = love.physics.newRectangleShape(3*love.graphics.getWidth(), 50)
+	level1.ground.body = love.physics.newBody(world, 0, love.graphics.getHeight(), "static")
+	level1.ground.shape = love.physics.newRectangleShape(30*love.graphics.getWidth(), 50)
 	level1.ground.fixture = love.physics.newFixture(level1.ground.body, level1.ground.shape, 0.05)
+	level1.ground.fixture:setUserData("ground")
 end
 
 function level1:draw()
