@@ -6,7 +6,7 @@ function player:init(x, y)
 	player.x = x
 	player.y = y
 
-	player.speed = 500
+	player.speed = 1300
 	player.jumpSpeed = 45
 	player.jumpCooldown = 5
 	player.currentJumpCooldown = player.jumpCooldown
@@ -16,10 +16,13 @@ function player:init(x, y)
 	player.body:setFixedRotation(true)
 	player.shape = love.physics.newRectangleShape(128, 300)
 	player.fixture = love.physics.newFixture(player.body, player.shape, 0.05)
+
 	player.fixture:setUserData("player")
 	player.fixture:setCategory(1)
 	player.fixture:setMask(2)
+
 	player.body:setGravityScale(1)
+	player.fixture:setFriction(1)
 
 	plate:init(x+120, y-64)
 
@@ -29,9 +32,9 @@ end
 function player:run(dt)
 
 	--movement
-	if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) then
+	if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) and player.body:getLinearVelocity() < player.speed then
 		player.body:applyForce(player.speed, 0)
-	elseif (love.keyboard.isDown("a") or love.keyboard.isDown("left")) then
+	elseif (love.keyboard.isDown("a") or love.keyboard.isDown("left")) and player.body:getLinearVelocity() > -player.speed then
 		player.body:applyForce(-player.speed, 0)
 	end
 
@@ -44,9 +47,7 @@ function player:run(dt)
 		if (player.isGrounded) then
 			player.currentJumpCooldown = player.jumpCooldown
 		end
-
 	end
-
 	--store position
 	player.x = player.body:getX()
 	player.y = player.body:getY()

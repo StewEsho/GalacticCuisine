@@ -78,3 +78,13 @@ end
 function postSolve(f1, f2, col, normalImp, tangentImp)
 
 end
+
+--------------------------------------------------------------------------------
+-- Input Callbacks
+--------------------------------------------------------------------------------
+
+function love.keypressed( key )
+   if key == "p" then
+		 love.window.setFullscreen(not love.window.getFullscreen())
+   end
+end
