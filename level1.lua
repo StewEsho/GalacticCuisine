@@ -1,4 +1,5 @@
 local level1 = {}
+local map = require "map1"
 
 function level1:init()
 	--background music
@@ -15,7 +16,15 @@ function level1:init()
 end
 
 function level1:draw()
+	--draw the map
+	for j = 1, 4 do
+      for i = 1, (36/256)*love.graphics.getWidth() do
+         love.graphics.draw(map.tiles[1].image, (i*256) - 18*love.graphics.getWidth(), (j*256)-512)
+      end
+   end
+
 	love.graphics.polygon("fill", level1.ground.body:getWorldPoints(level1.ground.shape:getPoints()))
+
 end
 
 return level1;

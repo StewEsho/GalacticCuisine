@@ -39,15 +39,16 @@ end
 
 function love.draw()
 	love.graphics.push()
+
+	love.graphics.scale(1, 1)
 	love.graphics.translate(-player.x + (love.graphics.getWidth()/3), -player.y -128 + (love.graphics.getHeight()* (8/9)))
 
+	l1:draw()
 	player:draw()
 	plate:draw()
 	earth:draw()
 
-	love.graphics.setColor(50, 255, 100)
-	l1:draw()
-
+	love.graphics.scale(1, 1)
 	love.graphics.pop()
 
 	love.graphics.print(debugText, 10, 10)
