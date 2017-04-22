@@ -9,12 +9,13 @@ function love.load(zz)
 	love.physics.setMeter(128)
 	world = love.physics.newWorld(0, 9.81*128, true)
 	world:setCallbacks(beginContact, endContact, preSolve, postSolve)
-	love.graphics.setDefaultFilter('nearest', 'nearest')
 
 	--set resolution etc.
 	love.graphics.scale(windowScaleX, windowScaleY)
+	love.graphics.setDefaultFilter('nearest', 'nearest')
 	love.graphics.setBackgroundColor(34, 2, 59)
 	love.window.setMode(1280, 720)
+	love.window.setTitle("Galactic Cusine || LD38")
 	-- love.window.setFullscreen(true)
 
 	--initialize player and earth
