@@ -1,8 +1,10 @@
 local plate = require "plate"
 local player = require "player"
 local earth = require "earth"
+--levels
+local l1 = require "level1"
 
-function love.load()
+function love.load(zz)
 	--enable physics
 	love.physics.setMeter(128)
 	world = love.physics.newWorld(0, 9.81*128, true)
@@ -14,20 +16,11 @@ function love.load()
 	love.window.setMode(1280, 720)
 	-- love.window.setFullscreen(true)
 
-	--init ground
-	ground = {}
-	ground.body = love.physics.newBody(world, love.graphics.getWidth()/2, 690, "static")
-	ground.shape = love.physics.newRectangleShape(love.graphics.getWidth()-100, 50)
-	ground.fixture = love.physics.newFixture(ground.body, ground.shape, 0.05)
-
-	--background music
-	bgm = love.audio.newSource("music/tense.wav", "static")
-	bgm:setLooping(true)
-	bgm:play()
-
 	--initialize player and earth
 	player:init(300, 200)
-	earth:init(plate.x-.1, plate.y - 200)
+	earth:init(plate.x-.1, plate.y - 50)
+
+	l1:init()
 end
 
 function love.update(dt)
@@ -39,12 +32,16 @@ function love.update(dt)
 end
 
 function love.draw()
+	love.graphics.push()
+	love.graphics.translate(-player.x + (love.graphics.getWidth()/3), -player.y -128 + (love.graphics.getHeight()* (8/9)))
 
 	player:draw()
 	plate:draw()
 	earth:draw()
 
 	love.graphics.setColor(50, 255, 100)
-	love.graphics.polygon("fill", ground.body:getWorldPoints(ground.shape:getPoints()))
+	l1:draw()
+
+	love.graphics.pop()
 
 end

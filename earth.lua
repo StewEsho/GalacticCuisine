@@ -10,6 +10,7 @@ function earth:init(x, y)
 	earth.fixture = love.physics.newFixture(earth.body, earth.shape, 1)
 	earth.fixture:setFriction(1)
 	earth.fixture:setCategory(2)
+	earth.body:setGravityScale(1.2)
 end
 
 function earth:run()
