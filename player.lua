@@ -7,7 +7,9 @@ function player:init(x, y)
 
 	player.body = love.physics.newBody(world, x, y, "kinematic")
 	player.shape = love.physics.newRectangleShape(128, 300)
-	player.fixture = love.physics.newFixture(player.body, player.shape, 2)
+	player.fixture = love.physics.newFixture(player.body, player.shape, 0.5)
+	player.fixture:setCategory(1)
+	player.fixture:setMask(2)
 
 	plate:init(x+120, y-64)
 
