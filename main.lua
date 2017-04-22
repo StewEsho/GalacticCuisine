@@ -19,13 +19,13 @@ function love.load()
 	ground.fixture = love.physics.newFixture(ground.body, ground.shape, 0.05)
 
 	--background music
-	bgm = love.audio.newSource("music/tense.wav")
+	bgm = love.audio.newSource("music/tense.wav", "static")
 	bgm:setLooping(true)
 	bgm:play()
 
-	--initialize plate
+	--initialize player and earth
 	player:init(300, 200)
-	earth:init(plate.x, plate.y - 32)
+	earth:init(plate.x, plate.y - 200)
 end
 
 function love.update(dt)
@@ -33,6 +33,7 @@ function love.update(dt)
 
 	player:run(dt)
 	plate:run()
+	earth:run()
 end
 
 function love.draw()

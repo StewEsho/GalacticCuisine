@@ -8,11 +8,16 @@ function earth:init(x, y)
 	earth.shape = love.physics.newCircleShape(16)
 	earth.fixture = love.physics.newFixture(earth.body, earth.shape, 2)
 	earth.fixture:setFriction(1)
-	-- earth.fixture:setCategory(2)
+	earth.fixture:setCategory(2)
 end
 
 function earth:run()
-	-- body --
+	earth.x = earth.body:getX()
+	earth.y = earth.body:getY()
+
+	if (earth.y > 720) then --reset level
+		-- love.load()
+	end
 end
 
 function earth:draw()
