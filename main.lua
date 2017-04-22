@@ -6,8 +6,10 @@ function love.load()
 	--enable physics
 	love.physics.setMeter(128)
 	world = love.physics.newWorld(0, 9.81*128, true)
+	love.graphics.setDefaultFilter('nearest', 'nearest')
 
 	--set resolution etc.
+	love.graphics.scale(windowScaleX, windowScaleY)
 	love.graphics.setBackgroundColor(34, 2, 59)
 	love.window.setMode(1280, 720)
 	-- love.window.setFullscreen(true)
