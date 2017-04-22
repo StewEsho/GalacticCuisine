@@ -18,6 +18,11 @@ function love.load()
 	ground.shape = love.physics.newRectangleShape(love.graphics.getWidth()-100, 50)
 	ground.fixture = love.physics.newFixture(ground.body, ground.shape, 0.05)
 
+	--background music
+	bgm = love.audio.newSource("music/tense.wav")
+	bgm:setLooping(true)
+	bgm:play()
+
 	--initialize plate
 	player:init(300, 200)
 	earth:init(plate.x, plate.y - 32)
