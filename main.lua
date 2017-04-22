@@ -1,4 +1,5 @@
 local plate = require "plate"
+local player = require "player"
 
 function love.load()
 	--enable physics
@@ -9,15 +10,20 @@ function love.load()
 	love.graphics.setBackgroundColor(34, 2, 59)
 	love.window.setMode(1280, 720)
 	love.window.setFullscreen(true)
+
+	--initialize plate
+	player:init(300, 200)
 end
 
 function love.update(dt)
-	-- body...
+	world:update(dt)
+
+	plate:run()
 end
 
 function love.draw()
-	-- body...
 
-	love.graphics.setColor(255, 255, 255, 255)
-	love.graphics.rectangle("fill", 480, 20, 64, 256)
+	player:draw()
+	plate:draw()
+
 end
