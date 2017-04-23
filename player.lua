@@ -8,10 +8,11 @@ function player:init(x, y)
 	player.y = y
 
 	player.speed = 500
-	player.jumpSpeed = 55
+	player.jumpSpeed = 70
 	player.jumpCooldown = 5
 	player.currentJumpCooldown = 0
 	player.isGrounded = false
+	player.state = "playing"
 
 	player.spritesheet = love.graphics.newImage("art/player.png")
 	player.animation = newAnimation(player.spritesheet, 128, 300, 0.2, 0)

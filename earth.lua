@@ -11,7 +11,7 @@ function earth:init(x, y)
 	earth.fixture:setFriction(1)
 	earth.fixture:setCategory(2)
 	earth.fixture:setUserData("earth")
-	earth.fixture:setRestitution(0.6) --bounciness
+	earth.fixture:setRestitution(0.3) --bounciness
 	earth.body:setGravityScale(1.2)
 end
 

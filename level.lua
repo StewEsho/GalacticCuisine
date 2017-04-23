@@ -27,8 +27,6 @@ function level:draw()
 				local indexedTile = level.tiles[i][j]
 				love.graphics.draw(level.spritesheet, indexedTile.q, indexedTile.x, indexedTile.y)
 
-				print(i .. " | " .. j)
-
 			end
 		end
 	end
@@ -55,10 +53,12 @@ function level:loadmap()
 		end
 
 		for y = 1, level.map.height do
+
+			local n = 0 --number of solid tiles in a row
+
 			for x = 1, level.map.width do
 
 				local index = x + (level.map.width * (y-1))
-				print(mapData[index])
 
 				if ( mapData[index] ~= 0 ) then
 					local quad = tileQuads[mapData[index]]
@@ -67,13 +67,31 @@ function level:loadmap()
 
 					--create physics bodies for solid tiles
 					if(level.map.tilesets[1].tiles[mapData[index]].properties["isSolid"] == true) then
-						t.body = love.physics.newBody(world, t.x+32, t.y+32, "static")
-						t.shape = love.physics.newRectangleShape(64, 64)
-						t.fixture = love.physics.newFixture(t.body, t.shape)
-						t.fixture:setUserData("ground")
-					end
+						n = n + 1
 
+						-- if (level.tiles[y][x-n] ~= nil and level.tiles[y][x-n].body ~= nil) then
+						-- 	level.tiles[y][x-n].shape = love.physics.newRectangleShape(64 * n, 64)
+						-- 	level.tiles[y][x-n].fixture = love.physics.newFixture(level.tiles[y][x-n].body, level.tiles[y][x-n].shape)
+						-- 	level.tiles[y][x-n].fixture:setUserData("ground")
+						-- else
+
+							t.body = love.physics.newBody(world, t.x+32, t.y+32, "static")
+							t.shape = love.physics.newRectangleShape(63, 64)
+							t.fixture = love.physics.newFixture(t.body, t.shape)
+							t.fixture:setCategory(level.map.tilesets[1].tiles[mapData[index]].properties["category"])
+							t.fixture:setUserData(level.map.tilesets[1].tiles[mapData[index]].properties["userData"])
+
+							if (t.fixture:getUserData() == "goal") then
+								t.fixture:setSensor(true)
+							end
+						-- end
+					else
+
+						n = 0
+
+					end
 				end
+
 
 			end
 		end
