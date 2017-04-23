@@ -4,7 +4,7 @@ local earth = require "earth"
 --levels
 local levelManager = require "level"
 
-function love.load(zz)
+function love.load()
 	--enable physics
 	love.physics.setMeter(128)
 	world = love.physics.newWorld(0, 9.81*128, true)
@@ -22,7 +22,7 @@ function love.load(zz)
 	player:init(300, 0)
 	earth:init(plate.x, plate.y - 50)
 
-	levelManager:init("level2")
+	levelManager:init("level3")
 
 	debugText = "DEBUG"
 end
