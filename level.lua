@@ -31,11 +31,13 @@ end
 function level:draw()
 
 	for i = 1, table.getn(level.tiles) do
-		for j = 1, table.getn(level.tiles[i]) do
+		for j = 1, level.map.width do
 			if (level.tiles[i][j] ~= nil) then
 
 				local indexedTile = level.tiles[i][j]
 				love.graphics.draw(level.spritesheet, indexedTile.q, indexedTile.x, indexedTile.y)
+
+				print(i .. " | " .. j)
 
 			end
 		end
@@ -51,7 +53,16 @@ function level:loadmap()
 
 	for layer = 1, #level.map.layers do
 		local mapData = level.map.layers[layer].data
-		local prop = level.map.layers[properties]
+		local prop = level.map.layers[layer].properties
+
+		--play bgm music
+		if (prop ~= nil) then
+			level.bgm = love.audio.newSource(prop["bgm"], "stream")
+			level.bgm:setLooping(true)
+			if(not level.bgm:isPlaying()) then
+				level.bgm:play()
+			end
+		end
 
 		for y = 1, level.map.height do
 			for x = 1, level.map.width do
@@ -64,7 +75,7 @@ function level:loadmap()
 					level.tiles[y][x] = level:tile(64*(x), 64*(y), 64, 64, quad)
 					local t = level.tiles[y][x]
 
-					if(mapData[index] ~= 4 and mapData[index] ~= 5 and mapData[index] ~= 6) then
+					if(mapData[index] ~= 5) then
 						t.body = love.physics.newBody(world, t.x+32, t.y+32, "static")
 						t.shape = love.physics.newRectangleShape(64, 64)
 						t.fixture = love.physics.newFixture(t.body, t.shape)

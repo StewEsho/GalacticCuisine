@@ -19,7 +19,7 @@ function earth:run()
 	earth.x = earth.body:getX()
 	earth.y = earth.body:getY()
 
-	if (earth.y > 720) then --reset level
+	if (earth.y > 200) then --reset level
 		-- love.load()
 	end
 end
