@@ -70,8 +70,6 @@ function love.update(dt)
 		player:run(dt)
 		plate:run()
 		earth:run()
-	elseif (game.state == "resettingLevel") then
-		game:reset()
 	end
 
 end
@@ -156,10 +154,18 @@ function love.keypressed( key )
 		love.window.setFullscreen(not love.window.getFullscreen())
 	elseif key == "r" then
 		if (player.state == "lose") then
-			game.state = "resettingLevel"
+			game:reset()
+			game.state = "initLevel"
 		elseif (player.state == "win") then
-			levelManager.bgm:stop()
+			game:reset()
 			game.state = "menu"
+		end
+	elseif key == "escape" then
+		if (game.state == "level") then
+			game:reset()
+			game.state = "menu"
+		elseif (game.state == "menu") then
+			love.event.quit()
 		end
 	end
 end
@@ -181,5 +187,4 @@ end
 function game:reset()
 	player:reset()
 	levelManager:kill()
-	game.state = "initLevel"
 end

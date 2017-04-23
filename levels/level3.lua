@@ -152,15 +152,104 @@ return {
       margin = 0,
       image = "../art/level2/platforms.png",
       imagewidth = 192,
-      imageheight = 192,
+      imageheight = 256,
       tileoffset = {
         x = 0,
         y = 0
       },
       properties = {},
       terrains = {},
-      tilecount = 9,
-      tiles = {}
+      tilecount = 12,
+      tiles = {
+        {
+          id = 0,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 1,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 2,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 3,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 4,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = false,
+            ["userData"] = "background"
+          }
+        },
+        {
+          id = 5,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 6,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 7,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 8,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 9,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "wall"
+          }
+        },
+        {
+          id = 10,
+          properties = {
+            ["category"] = 5,
+            ["isSolid"] = true,
+            ["userData"] = "goal"
+          }
+        }
+      }
     }
   },
   layers = {
@@ -176,7 +265,11 @@ return {
       offsetx = 0,
       offsety = 0,
       properties = {
-        ["bgm"] = "music/power.wav"
+        ["b"] = 88,
+        ["bgColor"] = "#ffda9d58",
+        ["bgm"] = "music/power.wav",
+        ["g"] = 157,
+        ["r"] = 218
       },
       encoding = "lua",
       data = {

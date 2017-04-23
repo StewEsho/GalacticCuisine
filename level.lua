@@ -6,9 +6,6 @@ local tileQuads = {}
 
 --initialize level manager
 function level:init(_name)
-
-	love.graphics.setBackgroundColor(34, 2, 59)
-
 	level.tiles = {}
 
 	level.map = require ("levels/" .. _name)
@@ -52,6 +49,13 @@ function level:loadmap()
 			if(not level.bgm:isPlaying()) then
 				level.bgm:play()
 			end
+		end
+
+		--set Background color
+		if (prop["bgColor"] ~= nil) then
+			love.graphics.setBackgroundColor(prop["r"], prop["g"], prop["b"])
+		else
+			love.graphics.setBackgroundColor(0, 0, 0)
 		end
 
 		for y = 1, level.map.height do
