@@ -21,7 +21,7 @@ function love.load()
 	love.window.setFullscreen(true)
 
 	game.state = "menu"
-	game.map = "level3"
+	game.map = ""
 	game.titlecards = {
 		great = love.graphics.newImage("art/great.png"),
 		uhoh = love.graphics.newImage("art/uhoh.png")
@@ -31,11 +31,19 @@ function love.load()
 		buttons = {
 			{
 				label = "Shortstop",
-				mapName = "level2"
+				mapName = "level2",
+				x = ((love.graphics.getWidth() - 360)/2),
+				y = 190, --190 + ((i-1) * 80)
+				width = 360,
+				height = 64
 			},
 			{
 				label = "Plains",
-				mapName = "level3"
+				mapName = "level3",
+				x = ((love.graphics.getWidth() - 360)/2),
+				y = 270, --190 + ((i-1) * 80)
+				width = 360,
+				height = 64
 			},
 		},
 		img = love.graphics.newImage("art/button.png"),
@@ -95,9 +103,10 @@ function love.draw()
 	end
 
 	if (game.state == "menu") then
+		love.graphics.setBackgroundColor(64, 32, 50)
 		for i = 1, #game.menu.buttons do
-			love.graphics.draw(game.menu.img, (love.graphics.getWidth() - 360)/2, 180 + ((i-1) * 80))
-			love.graphics.print(game.menu.buttons[i].label, (love.graphics.getWidth() - (22 * game.menu.buttons[i].label:len()))/2, 190 + ((i-1) * 80))
+			love.graphics.draw(game.menu.img, game.menu.buttons[i].x, game.menu.buttons[i].y)
+			love.graphics.print(game.menu.buttons[i].label, (love.graphics.getWidth() - (22 * game.menu.buttons[i].label:len()))/2, 205 + ((i-1) * 80))
 		end
 
 		love.graphics.draw(game.menu.title, (love.graphics.getWidth() - 960)/2, 15)
@@ -149,7 +158,22 @@ function love.keypressed( key )
 		if (player.state == "lose") then
 			game.state = "resettingLevel"
 		elseif (player.state == "win") then
+			levelManager.bgm:stop()
 			game.state = "menu"
+		end
+	end
+end
+
+function love.mousereleased(x, y, button, isTouch)
+	if(game.state == "menu" and button == 1) then
+		for i = 1, #game.menu.buttons do
+			if (x > game.menu.buttons[i].x
+					and x < (game.menu.buttons[i].x + game.menu.buttons[i].width)
+					and y > game.menu.buttons[i].y
+					and y < (game.menu.buttons[i].y + game.menu.buttons[i].height)) then --button is pressed
+						game.map = game.menu.buttons[i].mapName
+						game.state = "initLevel"
+			end
 		end
 	end
 end

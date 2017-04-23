@@ -28,7 +28,80 @@ return {
       properties = {},
       terrains = {},
       tilecount = 9,
-      tiles = {}
+      tiles = {
+        {
+          id = 0,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 1,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 2,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 3,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 4,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = false,
+            ["userData"] = "background"
+          }
+        },
+        {
+          id = 5,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 6,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 7,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        },
+        {
+          id = 8,
+          properties = {
+            ["category"] = 4,
+            ["isSolid"] = true,
+            ["userData"] = "ground"
+          }
+        }
+      }
     }
   },
   layers = {

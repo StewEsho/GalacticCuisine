@@ -7,6 +7,8 @@ local tileQuads = {}
 --initialize level manager
 function level:init(_name)
 
+	love.graphics.setBackgroundColor(34, 2, 59)
+
 	level.tiles = {}
 
 	level.map = require ("levels/" .. _name)

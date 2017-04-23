@@ -2,6 +2,69 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="52" height="6" tilewidth="64" tileheight="64" nextobjectid="1">
  <tileset firstgid="1" name="Platforms" tilewidth="64" tileheight="64" tilecount="9" columns="3">
   <image source="../art/level2/platforms.png" width="192" height="192"/>
+  <tile id="0">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="false"/>
+    <property name="userData" value="background"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="category" type="int" value="4"/>
+    <property name="isSolid" type="bool" value="true"/>
+    <property name="userData" value="ground"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tile Layer 1" width="52" height="6">
   <properties>
