@@ -26,7 +26,7 @@ function player:init(x, y)
 	player.fixture:setMask(2)
 
 	player.body:setGravityScale(1)
-	player.fixture:setFriction(1)
+	player.fixture:setFriction(0.5)
 
 	plate:init(x+120, y-64)
 

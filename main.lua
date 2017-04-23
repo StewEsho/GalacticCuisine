@@ -2,7 +2,7 @@ local plate = require "plate"
 local player = require "player"
 local earth = require "earth"
 --levels
-local l1 = require "level1"
+local levelManager = require "level"
 
 function love.load(zz)
 	--enable physics
@@ -22,7 +22,7 @@ function love.load(zz)
 	player:init(300, 0)
 	earth:init(plate.x, plate.y - 50)
 
-	l1:init()
+	levelManager:init("map2")
 
 	debugText = "DEBUG"
 end
@@ -43,7 +43,7 @@ function love.draw()
 	love.graphics.scale(1, 1)
 	love.graphics.translate(-player.x + (love.graphics.getWidth()/3), -player.y -128 + (love.graphics.getHeight()* (8/9)))
 
-	l1:draw()
+	levelManager:draw()
 	player:draw()
 	plate:draw()
 	earth:draw()
