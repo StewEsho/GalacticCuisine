@@ -7,10 +7,10 @@ function player:init(x, y)
 	player.x = x
 	player.y = y
 
-	player.speed = 1300
-	player.jumpSpeed = 45
+	player.speed = 500
+	player.jumpSpeed = 55
 	player.jumpCooldown = 5
-	player.currentJumpCooldown = player.jumpCooldown
+	player.currentJumpCooldown = 0
 	player.isGrounded = false
 
 	player.spritesheet = love.graphics.newImage("art/player.png")
@@ -26,7 +26,7 @@ function player:init(x, y)
 	player.fixture:setMask(2)
 
 	player.body:setGravityScale(1)
-	player.fixture:setFriction(1)
+	player.fixture:setFriction(0.3)
 
 	plate:init(x+120, y-64)
 
