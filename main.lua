@@ -23,7 +23,6 @@ function love.load()
 
 	--initialize player and earth
 	player:init(300, 0 + (32 * levelManager.map.height))
-	earth:init(plate.x, plate.y - 50)
 
 	debugText = "DEBUG"
 end
@@ -93,7 +92,9 @@ end
 --------------------------------------------------------------------------------
 
 function love.keypressed( key )
-   if key == "p" then
-		 love.window.setFullscreen(not love.window.getFullscreen())
-   end
+	if key == "p" then
+		love.window.setFullscreen(not love.window.getFullscreen())
+	elseif key == "r" and player.state = "lose" then
+		player:reset()
+	end
 end

@@ -2,7 +2,9 @@ local plate = {}
 
 function plate:init(x, y)
 	plate.x = x
+	plate.ox = x
 	plate.y = y
+	plate.oy = y
 
 	--initiate plate bodies
 	plate.body = love.physics.newBody(world, x, y, "dynamic")

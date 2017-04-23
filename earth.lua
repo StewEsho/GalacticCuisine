@@ -2,7 +2,9 @@ local earth = {}
 
 function earth:init(x, y)
 	earth.x = x
+	earth.ox = x
 	earth.y = y
+	earth.oy = y
 	earth.sprite = love.graphics.newImage("art/earth.png")
 
 	earth.body = love.physics.newBody(world, x, y, "dynamic")
@@ -15,9 +17,11 @@ function earth:init(x, y)
 	earth.body:setGravityScale(1.2)
 end
 
-function earth:run()
-	earth.x = earth.body:getX()
-	earth.y = earth.body:getY()
+function earth:run(state)
+	if (state ~= "resetting") then
+		earth.x = earth.body:getX()
+		earth.y = earth.body:getY()
+	end
 
 	if (earth.y > 200) then --reset level
 		-- love.load()
