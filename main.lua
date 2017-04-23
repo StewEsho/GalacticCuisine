@@ -22,7 +22,7 @@ function love.load(zz)
 	player:init(300, 0)
 	earth:init(plate.x, plate.y - 50)
 
-	levelManager:init("map2")
+	levelManager:init("level2")
 
 	debugText = "DEBUG"
 end

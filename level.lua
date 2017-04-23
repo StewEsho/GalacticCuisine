@@ -19,10 +19,8 @@ function level:init(name)
 
 	level.tiles = {}
 
-	if (name == "map2") then
-		level.map = require "levels/level2"
-		level.spritesheet = love.graphics.newImage("art/level2/platforms.png")
-	end
+	level.map = require ("levels/" .. name)
+	level.spritesheet = love.graphics.newImage("art/" .. name .."/platforms.png")
 
 	level:loadmap()
 end
@@ -56,7 +54,7 @@ function level:loadmap()
 		local prop = level.map.layers[layer].properties
 
 		--play bgm music
-		if (prop ~= nil) then
+		if (prop["bgm"] ~= nil) then
 			level.bgm = love.audio.newSource(prop["bgm"], "stream")
 			level.bgm:setLooping(true)
 			if(not level.bgm:isPlaying()) then
