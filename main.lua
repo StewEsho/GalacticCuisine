@@ -20,19 +20,31 @@ function love.load()
 	love.window.setTitle("Galactic Cusine || LD38")
 	love.window.setFullscreen(true)
 
-	game.state = "initLevel"
+	game.state = "menu"
 	game.map = "level3"
 	game.titlecards = {
 		great = love.graphics.newImage("art/great.png"),
 		uhoh = love.graphics.newImage("art/uhoh.png")
 	}
 
-	-- levelManager:init("level3")
-	--
-	-- --initialize player and earth
-	-- player:init(300, 0 + (32 * levelManager.map.height))
-	--
-	-- debugText = "DEBUG"
+	game.menu = {
+		buttons = {
+			{
+				label = "Shortstop",
+				mapName = "level2"
+			},
+			{
+				label = "Plains",
+				mapName = "level3"
+			},
+		},
+		img = love.graphics.newImage("art/button.png"),
+		title = love.graphics.newImage("art/title.png"),
+		controls = love.graphics.newImage("art/controls.png"),
+		font = love.graphics.newFont("font/slkscr.ttf", 32)
+	}
+
+	love.graphics.setFont(game.menu.font)
 end
 
 function love.update(dt)
@@ -80,6 +92,16 @@ function love.draw()
 		end
 
 		-- love.graphics.print(debugText, 10, 10)
+	end
+
+	if (game.state == "menu") then
+		for i = 1, #game.menu.buttons do
+			love.graphics.draw(game.menu.img, (love.graphics.getWidth() - 360)/2, 180 + ((i-1) * 80))
+			love.graphics.print(game.menu.buttons[i].label, (love.graphics.getWidth() - (22 * game.menu.buttons[i].label:len()))/2, 190 + ((i-1) * 80))
+		end
+
+		love.graphics.draw(game.menu.title, (love.graphics.getWidth() - 960)/2, 15)
+		love.graphics.draw(game.menu.controls, 15, love.graphics.getHeight() - 255)
 	end
 
 end
