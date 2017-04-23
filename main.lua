@@ -4,6 +4,7 @@ local earth = require "earth"
 
 --levels
 local levelManager = require "level"
+game = {}
 
 function love.load()
 	--enable physics
@@ -19,39 +20,57 @@ function love.load()
 	love.window.setTitle("Galactic Cusine || LD38")
 	-- love.window.setFullscreen(true)
 
-	levelManager:init("level3")
+	game.state = "initLevel"
+	game.map = "level3"
 
-	--initialize player and earth
-	player:init(300, 0 + (32 * levelManager.map.height))
-
-	debugText = "DEBUG"
+	-- levelManager:init("level3")
+	--
+	-- --initialize player and earth
+	-- player:init(300, 0 + (32 * levelManager.map.height))
+	--
+	-- debugText = "DEBUG"
 end
 
 function love.update(dt)
-	world:update(dt)
+	if (game.state == "initLevel") then
+		levelManager:init(game.map)
 
-	player:run(dt)
-	plate:run()
-	earth:run()
+		--initialize player and earth
+		player:init(300, 0 + (32 * levelManager.map.height))
 
-	debugText = "PLAYER STATE: " .. player.state
+		debugText = "DEBUG"
+		game.state = "level"
+	elseif (game.state == "level") then
+		world:update(dt)
+
+		player:run(dt)
+		plate:run()
+		earth:run()
+	elseif (game.state == "resettingLevel") then
+		game:reset()
+	end
+
+	debugText = "JUMP COOLDOWN: " .. player.currentJumpCooldown
 end
 
 function love.draw()
-	love.graphics.push()
 
-	love.graphics.scale(1, 1)
-	love.graphics.translate(-player.x + (love.graphics.getWidth()/3), -player.y +(love.graphics.getHeight() * (2/3)))
+	if (game.state == "level" or game.state == "resettingLevel") then
+		love.graphics.push()
 
-	levelManager:draw()
-	player:draw()
-	plate:draw()
-	earth:draw()
+		love.graphics.scale(1, 1)
+		love.graphics.translate(-player.x + (love.graphics.getWidth()/3), -player.y +(love.graphics.getHeight() * (2/3)))
 
-	love.graphics.scale(1, 1)
-	love.graphics.pop()
+		levelManager:draw()
+		player:draw()
+		plate:draw()
+		earth:draw()
 
-	love.graphics.print(debugText, 10, 10)
+		love.graphics.scale(1, 1)
+		love.graphics.pop()
+
+		love.graphics.print(debugText, 10, 10)
+	end
 
 end
 
@@ -94,7 +113,13 @@ end
 function love.keypressed( key )
 	if key == "p" then
 		love.window.setFullscreen(not love.window.getFullscreen())
-	elseif key == "r" and player.state = "lose" then
-		player:reset()
+	elseif key == "r" and player.state == "lose" then
+		game.state = "resettingLevel"
 	end
+end
+
+function game:reset()
+	player:reset()
+	levelManager:kill()
+	game.state = "initLevel"
 end

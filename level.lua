@@ -5,12 +5,12 @@ local newQuad = love.graphics.newQuad
 local tileQuads = {}
 
 --initialize level manager
-function level:init(name)
+function level:init(_name)
 
 	level.tiles = {}
 
-	level.map = require ("levels/" .. name)
-	level.spritesheet = love.graphics.newImage("art/" .. name .."/platforms.png")
+	level.map = require ("levels/" .. _name)
+	level.spritesheet = love.graphics.newImage("art/" .. _name .."/platforms.png")
 
 	level:loadQuads()
 
@@ -128,6 +128,23 @@ function level:loadQuads()
 			)
 		end
 	end
+end
+
+function level:kill()
+
+	level.bgm:stop()
+
+	for i = 1, table.getn(level.tiles) do
+		for j = 1, level.map.width do
+			if (level.tiles[i][j] ~= nil) then
+
+				if (level.tiles[i][j].body ~= nil) then
+					level.tiles[i][j].body:destroy()
+				end
+			end
+		end
+	end
+
 end
 
 return level;

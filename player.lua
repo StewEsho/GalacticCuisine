@@ -15,7 +15,6 @@ function player:init(x, y)
 	player.currentJumpCooldown = 0
 	player.isGrounded = false
 	player.state = "playing"
-	player.resetCooldown = 10
 
 	player.spritesheet = love.graphics.newImage("art/player.png")
 	player.animation = newAnimation(player.spritesheet, 128, 300, 0.2, 0)
@@ -39,36 +38,27 @@ function player:init(x, y)
 end
 
 function player:run(dt)
-	if (player.state ~= "resetting") then
-		--movement
-		if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) and player.body:getLinearVelocity() < player.speed then
-			player.body:applyForce(player.speed, 0)
-		elseif (love.keyboard.isDown("a") or love.keyboard.isDown("left")) and player.body:getLinearVelocity() > -player.speed then
-			player.body:applyForce(-player.speed, 0)
-		end
+	--movement
+	if (love.keyboard.isDown("d") or love.keyboard.isDown("right")) and player.body:getLinearVelocity() < player.speed then
+		player.body:applyForce(player.speed, 0)
+	elseif (love.keyboard.isDown("a") or love.keyboard.isDown("left")) and player.body:getLinearVelocity() > -player.speed then
+		player.body:applyForce(-player.speed, 0)
+	end
 
-		--jumping
-		if (love.keyboard.isDown("space") or love.keyboard.isDown("w") or love.keyboard.isDown("up")) then
-			player.body:setGravityScale(1)
-			player:jump()
-		else
-			player.body:setGravityScale(1.5)
-			if (player.isGrounded) then
-				player.currentJumpCooldown = player.jumpCooldown
-			end
-		end
-
-		--store position
-		player.x = player.body:getX()
-		player.y = player.body:getY()
-
+	--jumping
+	if (love.keyboard.isDown("space") or love.keyboard.isDown("w") or love.keyboard.isDown("up")) then
+		player.body:setGravityScale(1)
+		player:jump()
 	else
-		player.resetCooldown = player.resetCooldown - 1
-		if player.resetCooldown < 0 then
-			player.resetCooldown = 10
-			player.state = "playing"
+		player.body:setGravityScale(1.5)
+		if (player.isGrounded) then
+			player.currentJumpCooldown = player.jumpCooldown
 		end
 	end
+
+	--store position
+	player.x = player.body:getX()
+	player.y = player.body:getY()
 
 	player.animation:update(dt)
 end
@@ -94,32 +84,13 @@ end
 function player:reset()
 	player.state = "resetting"
 
-	player.body:setAwake(false)
-	earth.body:setAwake(false)
-	plate.body:setAwake(false)
+	plate.body:destroy()
+	plate.rEdge.body:destroy()
+	plate.lEdge.body:destroy()
 
-	plate.body:setAngle(0)
-	plate.body:setLinearVelocity(0, 0)
-	plate.rEdge.body:setAngle(0)
-	plate.rEdge.body:setLinearVelocity(0, 0)
-	plate.lEdge.body:setAngle(0)
-	plate.lEdge.body:setLinearVelocity(0, 0)
-	plate.x = plate.ox
-	plate.y = plate.oy
+	player.body:destroy()
 
-	player.body:setPosition(player.ox, player.oy)
-	player.body:setLinearVelocity(0, 0)
-	player.x = player.ox
-	player.y = player.oy
-
-	earth.body:setPosition(earth.ox, earth.oy)
-	earth.body:setLinearVelocity(0, 0)
-	earth.x = earth.ox
-	earth.y = earth.oy
-
-	player.body:setAwake(true)
-	earth.body:setAwake(true)
-	plate.body:setAwake(true)
+	earth.body:destroy()
 
 end
 
