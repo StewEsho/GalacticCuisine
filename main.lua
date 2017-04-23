@@ -18,10 +18,14 @@ function love.load()
 	love.graphics.setBackgroundColor(34, 2, 59)
 	love.window.setMode(1280, 720)
 	love.window.setTitle("Galactic Cusine || LD38")
-	-- love.window.setFullscreen(true)
+	love.window.setFullscreen(true)
 
 	game.state = "initLevel"
 	game.map = "level3"
+	game.titlecards = {
+		great = love.graphics.newImage("art/great.png"),
+		uhoh = love.graphics.newImage("art/uhoh.png")
+	}
 
 	-- levelManager:init("level3")
 	--
@@ -50,7 +54,6 @@ function love.update(dt)
 		game:reset()
 	end
 
-	debugText = "JUMP COOLDOWN: " .. player.currentJumpCooldown
 end
 
 function love.draw()
@@ -69,7 +72,14 @@ function love.draw()
 		love.graphics.scale(1, 1)
 		love.graphics.pop()
 
-		love.graphics.print(debugText, 10, 10)
+		love.graphics.setColor(255, 255, 255)
+		if(player.state == "win") then
+			love.graphics.draw(game.titlecards.great, (love.graphics.getWidth() - 960)/2, 15 )
+		elseif(player.state == "lose") then
+			love.graphics.draw(game.titlecards.uhoh, (love.graphics.getWidth() - 960)/2, 15 )
+		end
+
+		-- love.graphics.print(debugText, 10, 10)
 	end
 
 end
@@ -113,8 +123,12 @@ end
 function love.keypressed( key )
 	if key == "p" then
 		love.window.setFullscreen(not love.window.getFullscreen())
-	elseif key == "r" and player.state == "lose" then
-		game.state = "resettingLevel"
+	elseif key == "r" then
+		if (player.state == "lose") then
+			game.state = "resettingLevel"
+		elseif (player.state == "win") then
+			game.state = "menu"
+		end
 	end
 end
 
