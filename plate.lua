@@ -43,7 +43,7 @@ function plate:run()
 end
 
 function plate:draw()
-	love.graphics.setColor(128, 128, 128, 255)
+	love.graphics.setColor(200, 200, 200, 255)
 	love.graphics.polygon("fill", plate.body:getWorldPoints(plate.shape:getPoints()))
 	love.graphics.polygon("fill", plate.rEdge.body:getWorldPoints(plate.rEdge.shape:getPoints()))
 	love.graphics.polygon("fill", plate.lEdge.body:getWorldPoints(plate.lEdge.shape:getPoints()))
