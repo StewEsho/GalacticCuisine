@@ -45,6 +45,14 @@ function love.load()
 				width = 360,
 				height = 64
 			},
+			{
+				label = "Descent",
+				mapName = "descent",
+				x = ((love.graphics.getWidth() - 360)/2),
+				y = 350, --190 + ((i-1) * 80)
+				width = 360,
+				height = 64
+			}
 		},
 		img = love.graphics.newImage("art/button.png"),
 		title = love.graphics.newImage("art/title.png"),
@@ -118,7 +126,7 @@ end
 --------------------------------------------------------------------------------
 
 function beginContact(f1, f2, col)
-	if(f2:getUserData() == "player" and f1:getUserData() == "ground") then
+	if((f2:getUserData() == "player" and f1:getUserData() == "ground") or (f1:getUserData() == "player" and f2:getUserData() == "ground")) then
 		player.isGrounded = true
 	elseif (f2:getUserData() == "earth") then
 
@@ -185,6 +193,8 @@ function love.mousereleased(x, y, button, isTouch)
 end
 
 function game:reset()
+
 	player:reset()
 	levelManager:kill()
+
 end
