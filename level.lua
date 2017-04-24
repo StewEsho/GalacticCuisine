@@ -46,6 +46,7 @@ function level:loadmap()
 		if (prop["bgm"] ~= nil) then
 			level.bgm = love.audio.newSource(prop["bgm"], "stream")
 			level.bgm:setLooping(true)
+			level.bgm:setVolume(0.33)
 			if(not level.bgm:isPlaying()) then
 				level.bgm:play()
 			end
